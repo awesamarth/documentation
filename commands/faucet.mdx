@@ -1,0 +1,52 @@
+---
+title: 'faucet'
+description: 'Request test tokens from the MegaETH testnet faucet'
+---
+
+# mega faucet
+
+The `faucet` command requests test tokens from the MegaETH testnet faucet.
+
+## Usage
+
+```bash
+mega faucet [options]
+```
+
+## Options
+
+| Option | Description |
+| ------ | ----------- |
+| `--account <name>` | Use a keystore account from the default keystores folder |
+| `--private-key <key>` | Use the provided private key |
+
+## Description
+
+This command allows you to request test tokens from the MegaETH testnet faucet. You must authenticate using either a stored account or a private key. The faucet has a cooldown period of 24 hours between requests from the same address.
+
+Each successful request provides 0.00001 ETH to your address on the MegaETH testnet.
+
+## Examples
+
+### Request tokens using a stored account
+
+```bash
+mega faucet --account myaccount
+```
+
+### Request tokens using a private key
+
+```bash
+mega faucet --private-key 0x123...abc
+```
+
+## Notes
+
+- You must provide either `--account` or `--private-key` to authenticate with the faucet
+- Addresses are limited to one faucet claim every 24 hours
+- After a successful request, you can check your balance with `mega balance`
+
+## Related
+
+- [account](/commands/account) - Manage accounts
+- [balance](/commands/balance) - Check your balance after receiving tokens

@@ -1,0 +1,64 @@
+---
+title: 'dev'
+description: 'Start development environments for Mega projects'
+---
+
+# mega dev
+
+The `dev` command starts development environments for your Mega blockchain project.
+
+## Usage
+
+```bash
+mega dev [options]
+```
+
+## Options
+
+| Option | Description |
+| ------ | ----------- |
+| `--foundry` | Start only the Foundry/Anvil local blockchain |
+| `--frontend` | Start only the Next.js frontend |
+
+## Description
+
+This command detects and starts the appropriate development environments for your Mega project. By default, if both environments are detected, it starts both the Foundry/Anvil local blockchain and the Next.js frontend development server.
+
+The command automatically:
+- Detects Foundry and Next.js projects in the current directory or subdirectories
+- Starts Anvil with appropriate configurations for local blockchain development
+- Determines and uses the right package manager (npm, yarn, or pnpm) for the frontend
+- Provides convenient output with contract addresses and private keys
+
+## Examples
+
+### Start both environments
+
+```bash
+mega dev
+```
+
+### Start only the Foundry/Anvil local blockchain
+
+```bash
+mega dev --foundry
+```
+
+### Start only the Next.js frontend
+
+```bash
+mega dev --frontend
+```
+
+## Notes
+
+- Press Ctrl+C to stop the development servers
+- For cleaner logs, consider running the environments in separate terminals
+- The Anvil blockchain runs on port 8545 by default
+- The Next.js server typically runs on port 3000
+
+## Related
+
+- [init](/commands/init) - Create a new Mega project
+- [compile](/commands/compile) - Compile contracts before development
+- [deploy](/commands/deploy) - Deploy contracts to your development environment

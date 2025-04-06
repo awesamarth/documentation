@@ -1,0 +1,64 @@
+---
+title: 'balance'
+description: 'Check the balance of an account or address on Mega testnet'
+---
+
+# mega balance
+
+The `balance` command checks the ETH balance of an account or address on the Mega testnet.
+
+## Usage
+
+```bash
+mega balance [address] [options]
+```
+
+## Arguments
+
+| Argument | Description |
+| -------- | ----------- |
+| `address` | Ethereum address to check (optional if using --account) |
+
+## Options
+
+| Option | Description |
+| ------ | ----------- |
+| `--account <name>` | Use an account from the keystore instead of an address |
+| `-e, --ether` | Show balance in ether instead of wei |
+
+## Description
+
+This command retrieves the ETH balance for an address on the Mega testnet. You can either provide an address directly or reference a stored account using the `--account` flag. By default, the balance is shown in wei, but you can use the `--ether` flag to display it in ether.
+
+## Examples
+
+### Check balance of an address
+
+```bash
+mega balance 0x742d35Cc6634C0532925a3b844Bc454e4438f44e
+# Balance: 10000000000000000 wei
+```
+
+### Check balance of a stored account
+
+```bash
+mega balance --account myaccount
+# Balance: 10000000000000000 wei
+```
+
+### Show balance in ether
+
+```bash
+mega balance 0x742d35Cc6634C0532925a3b844Bc454e4438f44e --ether
+# Balance: 0.01 ETH
+```
+
+```bash
+mega balance --account myaccount --ether
+# Balance: 0.01 ETH
+```
+
+## Related
+
+- [account](/commands/account) - Manage accounts
+- [faucet](/commands/faucet) - Get test tokens

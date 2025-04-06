@@ -1,0 +1,62 @@
+---
+title: 'init'
+description: 'Create a new Mega project with boilerplate code'
+---
+
+# mega init
+
+The `init` command creates a new project with boilerplate code configured for MegaETH.
+
+## Usage
+
+```bash
+mega init [project-name] [options]
+```
+
+## Arguments
+
+| Argument | Description |
+| -------- | ----------- |
+| `project-name` | Name of the project directory to create (optional, will prompt if not provided) |
+
+## Options
+
+| Option | Description |
+| ------ | ----------- |
+| `--frontend` | Create a frontend-only project (NextJS + WalletConnect) |
+| `--foundry` | Create a Foundry-only project configured for Mega testnet |
+
+## Description
+
+This command scaffolds a new project with predefined templates and configurations for working with MegaETH. By default, it creates a full-stack project that includes both Foundry for smart contract development and NextJS for frontend development.
+
+The command:
+- Creates a new directory with the specified project name
+- Clones the appropriate template repository
+- Initializes a new git repository
+- Installs dependencies
+
+## Examples
+
+### Create a full-stack project
+
+```bash
+mega init my-mega-project
+```
+
+### Create a frontend-only project
+
+```bash
+mega init my-frontend --frontend
+```
+
+### Create a Foundry-only project
+
+```bash
+mega init my-contracts --foundry
+```
+
+## Related
+
+- [dev](/commands/dev) - Start the development environment after creating a project
+- [compile](/commands/compile) - Compile contracts in your new project

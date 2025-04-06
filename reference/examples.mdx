@@ -1,0 +1,176 @@
+---
+title: 'Examples'
+description: 'Practical examples and workflows using Mega CLI'
+---
+
+# Examples
+
+This section provides practical examples and complete workflows to help you get the most out of Mega CLI.
+
+## Smart Contract Development Workflow
+
+This example shows a complete workflow for developing, testing, and deploying a smart contract to the Mega testnet.
+
+### 1. Initialize a Foundry Project
+
+```bash
+# Create a new Foundry project
+mega init my-contract-project --foundry
+
+# Navigate to the project
+cd my-contract-project
+```
+
+### 2. Create a Simple Contract
+
+Create a file named `src/Counter.sol`:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+contract Counter {
+    uint256 private counter;
+    
+    event CounterIncremented(address indexed user, uint256 newValue);
+    
+    function getCount() public view returns (uint256) {
+        return counter;
+    }
+    
+    function increment() public {
+        counter += 1;
+        emit CounterIncremented(msg.sender, counter);
+    }
+}
+```
+
+### 3. Write a Test
+
+Create a file named `test/Counter.t.sol`:
+
+```solidity
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.20;
+
+import "forge-std/Test.sol";
+import "../src/Counter.sol";
+
+contract CounterTest is Test {
+    Counter public counter;
+    
+    function setUp() public {
+        counter = new Counter();
+    }
+    
+    function testInitialCount() public {
+        assertEq(counter.getCount(), 0);
+    }
+    
+    function testIncrement() public {
+        counter.increment();
+        assertEq(counter.getCount(), 1);
+    }
+    
+    function testEmitsEvent() public {
+        vm.expectEmit(true, false, false, true);
+        emit Counter.CounterIncremented(address(this), 1);
+        counter.increment();
+    }
+}
+```
+
+### 4. Compile and Test
+
+```bash
+# Compile contracts
+mega compile
+
+# Run tests
+forge test
+```
+
+
+### 5. Deploy Locally
+You can use the mega deploy command like so:
+
+```bash
+# Deploy to local network
+mega deploy src/Counter.sol:Counter --broadcast
+```
+For more complex deployment scenarios, you can still create deployment scripts in the script/ directory, but for this example, we'll use the direct deployment approach.
+
+
+### 6. Create an Account
+
+```bash
+# Create a new account
+mega account create
+# > Enter a name for your wallet: dev
+# > Enter a password: ********
+```
+
+### 7. Get Testnet Tokens
+
+```bash
+# Request tokens from the faucet
+mega faucet --account <account-name>
+```
+
+### 8. Deploy to Testnet
+
+```bash
+# Deploy to Mega testnet
+mega deploy src/Counter.sol:Counter --testnet --broadcast --account <account-name>
+```
+
+## Full-Stack App Development Workflow
+
+This example demonstrates how to create and run a full-stack application.
+
+### 1. Initialize a Full-Stack Project
+
+```bash
+# Create a new full-stack project
+mega init my-dapp
+
+# Navigate to the project
+cd my-dapp
+```
+
+### 2. Start the Development Environment
+
+```bash
+# Start both the Foundry and frontend environments
+mega dev
+```
+
+### 3. Deploy a Contract to the Local Chain
+
+In a new terminal:
+
+```bash
+# Compile contracts
+mega compile
+
+# Deploy to local Anvil chain (uses default Anvil private key)
+mega deploy foundry-app/src/GmegaCounter.sol:GmegaCounter --broadcast
+```
+
+### 4. Connect the Frontend to the Contract
+
+Update `next-app/src/constants/index.js` with your contract address:
+
+```javascript
+export const CONTRACT_ADDRESSES = {
+  GmegaCounter: "0x5FbDB2315678afecb367f032d93F642f64180aa3" // Replace with your deployed address
+};
+```
+
+### 5. Test the Application
+
+After starting the development environment with `mega dev`, you can:
+
+1. Visit `http://localhost:3000/gmega` in your browser
+2. Connect your wallet
+3. Interact with the deployed contract

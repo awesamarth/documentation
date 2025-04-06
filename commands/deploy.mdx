@@ -1,0 +1,83 @@
+---
+title: 'deploy'
+description: 'Deploy smart contracts to local network or Mega testnet'
+---
+
+# mega deploy
+
+The `deploy` command (also aliased as `mega create`) deploys smart contracts to either a local development network or the Mega testnet.
+
+## Usage
+
+```bash
+mega deploy <contract> [options]
+```
+
+## Arguments
+
+| Argument | Description |
+| -------- | ----------- |
+| `contract` | Path to the contract file and contract name (e.g., `src/MyContract.sol:MyContract`) |
+
+## Options
+
+| Option | Description |
+| ------ | ----------- |
+| `--testnet` | Deploy to Mega testnet instead of local network |
+| `--broadcast` | Broadcast the transaction instead of doing a dry run |
+| `--constructor-args [args...]` | The constructor arguments |
+| `--verify` | Verify contract after creation |
+| `--account <name>` | Use a keystore account from the default keystores folder |
+| `--private-key <key>` | Use the provided private key |
+| `--gas-limit <limit>` | Gas limit for the transaction |
+| `--value <value>` | Ether to send in the transaction |
+| `--optimize` | Activate the Solidity optimizer when deploying |
+
+<Note>
+  This command supports all options available in `forge create`. See the 
+  [Forge documentation](https://book.getfoundry.sh/reference/forge/forge-create) for a complete list.
+</Note>
+
+## Description
+
+This command deploys Solidity smart contracts to a blockchain network. By default, it deploys to a local Anvil network, but you can use the `--testnet` flag to deploy to the Mega testnet.
+
+The command is a wrapper around Foundry's `forge create` with additional features specific to the Mega ecosystem.
+
+## Examples
+
+### Deploy to local network (dry run)
+
+```bash
+mega deploy src/MyContract.sol:MyContract
+```
+
+### Deploy to local network and broadcast the transaction
+
+```bash
+mega deploy src/MyContract.sol:MyContract --broadcast
+```
+
+### Deploy to Mega testnet using a stored account
+
+```bash
+mega deploy src/MyContract.sol:MyContract --testnet --broadcast --account <account-name>
+```
+
+### Deploy to Mega testnet using a private key
+
+```bash
+mega deploy src/MyContract.sol:MyContract --testnet --broadcast --private-key <private-key>
+```
+
+### Deploy with constructor arguments
+
+```bash
+mega deploy src/MyContract.sol:MyContract --broadcast --constructor-args "Hello World" 123
+```
+
+## Related
+
+- [compile](/commands/compile) - Compile contracts before deployment
+- [account](/commands/account) - Manage accounts for deployment
+- [balance](/commands/balance) - Check balance before deployment

@@ -1,0 +1,158 @@
+---
+title: 'Project Structure'
+description: 'Understanding the directory structure of Mega CLI projects'
+---
+
+# Project Structure
+
+Mega CLI creates standardized project structures to help you get started quickly with blockchain development on the Mega network. This guide explains the organization and purpose of each component in the different project types.
+
+## Full-Stack Project Structure
+
+When you run `mega init` without flags, you get a full-stack project with both smart contract and frontend development environments. Here's an overview of the key directories and files:
+
+```
+my-mega-project/
+├── README.md
+├── foundry-app/            # Smart contract development
+│   ├── foundry.toml        # Foundry configuration
+│   ├── lib/                # Dependencies including forge-std
+│   │   └── forge-std/      # Foundry's standard library
+│   ├── script/             # Deployment scripts
+│   │   └── GmegaCounter.s.sol # Example deployment script
+│   ├── src/                # Contract source files
+│   │   └── GmegaCounter.sol # Example contract
+│   ├── test/               # Contract test files
+│   │   └── GmegaCounter.t.sol # Example test
+│
+├── next-app/               # Frontend application
+│   ├── public/             # Static assets
+│   │   ├── logo-smol-coloured.png
+│   │   ├── logo-smol-transparent.png
+│   │   ├── megaeth-text-logo.png
+│   │   └── megaeth-text-logo.svg
+│   ├── src/
+│   │   ├── app/            # Next.js app router
+│   │   │   ├── favicon.ico
+│   │   │   ├── globals.css
+│   │   │   ├── gmega/      # Demo application routes
+│   │   │   │   └── page.js
+│   │   │   ├── layout.js   # Root layout component
+│   │   │   └── page.js     # Home page component
+│   │   ├── components/     # Reusable components
+│   │   │   └── Navbar.js
+│   │   ├── config/         # Application configuration
+│   │   │   └── index.js
+│   │   ├── constants/      # Constants and types
+│   │   │   └── index.js
+│   │   └── context/        # React context providers
+│   │       └── index.js
+│   ├── package.json        # Dependencies and scripts
+│   ├── pnpm-lock.yaml      # Lock file (may vary by package manager)
+│   ├── jsconfig.json       # JavaScript configuration
+│   ├── next.config.mjs     # Next.js configuration
+│   └── postcss.config.mjs  # PostCSS configuration
+│
+└── out/                    # Global compiled artifacts (generated)
+```
+
+### Key Components
+
+#### Foundry App Directory
+
+The `foundry-app` directory contains your smart contract code organized in the Foundry standard structure:
+
+- **lib/**: External dependencies installed via Forge, primarily containing the `forge-std` standard library
+- **script/**: Solidity scripts for deployment and other contract interactions, using the `.s.sol` suffix
+- **src/**: Source code for your smart contracts, with `GmegaCounter.sol` included as an example
+- **test/**: Test files for your smart contracts, conventionally named with a `.t.sol` suffix
+- **foundry.toml**: Configuration file for Foundry settings
+
+#### Next.js App Directory
+
+The `next-app` directory contains a modern Next.js application:
+
+- **src/app/**: Page components and routes using the Next.js app router
+  - **gmega/**: Example application demonstrating integration with Mega blockchain
+- **src/components/**: Reusable React components, including a `Navbar.js`
+- **src/config/**: Configuration files for the application
+- **src/constants/**: JavaScript constants, likely including contract addresses
+- **src/context/**: React context providers for state management
+- **public/**: Static assets including logos and images
+
+## Frontend-Only Project Structure
+
+When you create a frontend-only project with `mega init --frontend`, you get a structure similar to the `next-app` directory in the full-stack project:
+
+```
+my-frontend/
+├── public/                 # Static assets with Mega logos
+├── src/
+│   ├── app/                # Next.js app router
+│   │   ├── gmega/          # Demo application routes
+│   │   ├── layout.js
+│   │   └── page.js
+│   ├── components/         # Reusable components
+│   ├── config/             # Application configuration
+│   ├── constants/          # Constants and types
+│   └── context/            # React context providers
+├── package.json            # Dependencies and scripts
+├── next.config.mjs         # Next.js configuration
+└── README.md               # Project documentation
+```
+
+This structure focuses solely on the frontend implementation, allowing you to connect to existing contracts on the Mega testnet.
+
+## Foundry-Only Project Structure
+
+When you create a Foundry-only project with `mega init --foundry`, you get the standard Foundry structure:
+
+```
+my-contracts/
+├── lib/                    # Dependencies including forge-std
+├── script/                 # Deployment scripts
+│   └── GmegaCounter.s.sol  # Example deployment script
+├── src/                    # Contract source files
+│   └── GmegaCounter.sol    # Example contract
+├── test/                   # Contract test files
+│   └── GmegaCounter.t.sol  # Example test
+├── foundry.toml            # Foundry configuration
+└── README.md               # Project documentation
+```
+
+This structure focuses entirely on smart contract development, ideal for developers who only need to write and deploy contracts.
+
+## Understanding File Naming Conventions
+
+### Solidity Files
+
+- **Contract files**: Placed in the `src/` directory with a `.sol` extension
+- **Test files**: Placed in the `test/` directory with a `.t.sol` extension
+- **Script files**: Placed in the `script/` directory with a `.s.sol` extension
+
+### Next.js Files
+
+- **Page components**: Named `page.js` in the appropriate directory under `src/app/`
+- **Layout components**: Named `layout.js` in the appropriate directory under `src/app/`
+- **Components**: Organized in the `src/components/` directory
+
+## Generated Directories
+
+Some directories are generated during the build process and should not be edited directly:
+
+- **out/**: Contains compiled Solidity artifacts
+- **cache/**: Contains cache files for faster compilation
+- **node_modules/**: Contains JavaScript dependencies (for Next.js projects)
+
+## Best Practices
+
+- Keep contract code in the `src/` directory and only test code in the `test/` directory
+- Follow the Foundry naming conventions for test files (`.t.sol`) and script files (`.s.sol`)
+- Use the `script/` directory for deployment scripts rather than ad-hoc deployment
+- Store deployed contract addresses in the frontend's `src/constants/` directory
+- Customize the `app/gmega/` example to build your application's functionality
+
+## Next Steps
+
+- See detailed [examples](/reference/examples) of common workflows
+- Check out the [Foundry Book](https://book.getfoundry.sh/) for more about Foundry project structure

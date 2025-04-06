@@ -1,0 +1,57 @@
+---
+title: 'account'
+description: 'Manage accounts and wallets in your local keystore'
+---
+
+# mega account
+
+The `account` command lets you create, import, and manage blockchain accounts.
+
+## Usage
+
+```bash
+mega account <subcommand> [options]
+```
+
+## Subcommands
+
+| Subcommand | Description |
+| ---------- | ----------- |
+| `create` | Create a new account/wallet with custom name |
+| `import` | Import an existing private key with a custom name |
+| `list` | List all managed accounts |
+
+## Description
+
+This command manages your local keystore accounts for use with Mega CLI. Accounts created or imported are stored in your local keystore and secured with a password. These accounts can be referenced in other commands using the `--account` flag.
+
+## Examples
+
+### Create a new account
+
+```bash
+mega account create
+# > Enter a name for your new wallet: myaccount
+# > Create password: ********
+```
+
+### Import an existing account
+
+```bash
+mega account import
+# > Enter a name for the wallet: imported
+# > Enter your private key: ********
+# > Create password: ********
+```
+
+### List all accounts
+
+```bash
+mega account list
+```
+
+## Related
+
+- [balance](/commands/balance) - Check account balances
+- [deploy](/commands/deploy) - Deploy contracts using your accounts
+- [faucet](/commands/faucet) - Get test tokens for your accounts

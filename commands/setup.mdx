@@ -1,0 +1,42 @@
+---
+title: 'setup'
+description: 'Check and install Foundry dependencies'
+---
+
+# mega setup
+
+The `setup` command checks for and installs Foundry dependencies required by Mega CLI.
+
+## Usage
+
+```bash
+mega setup [options]
+```
+
+## Options
+
+| Option | Description |
+| ------ | ----------- |
+| `--check` | Only check if dependencies are installed without attempting installation |
+
+## Description
+
+This command verifies if [Foundry](https://book.getfoundry.sh/) (Anvil, Cast, Chisel, and Forge) is installed on your system. If not found:
+
+- On Linux/macOS: Automatically installs Foundry
+- On Windows: Provides guidance for manual installation
+
+## Examples
+
+```bash
+# Install Foundry dependencies
+mega setup
+
+# Only check if Foundry is installed
+mega setup --check
+```
+
+## Related
+
+- [account](/commands/account) - Once Foundry is installed, create accounts
+- [dev](/commands/dev) - Start development environments using Foundry

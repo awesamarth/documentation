@@ -1,0 +1,66 @@
+---
+title: 'compile'
+description: 'Compile Solidity contracts using Foundry'
+---
+
+# mega compile
+
+The `compile` command (also aliased as `mega build`) compiles Solidity contracts using Foundry's Forge under the hood.
+
+## Usage
+
+```bash
+mega compile [options]
+```
+
+## Options
+
+Mega CLI passes all options directly to Forge. Here are some commonly used options:
+
+| Option | Description |
+| ------ | ----------- |
+| `--names` | Print compiled contract names |
+| `--sizes` | Print compiled non-test contract sizes |
+| `--force` | Clear the cache and recompile |
+| `--optimize` | Activate the Solidity optimizer |
+| `--watch` | Watch for changes and recompile |
+
+<Note>
+  The `mega compile` command supports all options available in `forge build`. 
+  See the [Forge documentation](https://book.getfoundry.sh/reference/forge/forge-build) for a complete list.
+</Note>
+
+## Description
+
+This command compiles your Solidity contracts using Foundry's Forge compiler. It's a wrapper around `forge build` that ensures compatibility with the Mega CLI workflow while providing access to all of Forge's powerful compilation options.
+
+## Examples
+
+### Basic compilation
+
+```bash
+mega compile
+```
+
+### Optimize contracts and show sizes
+
+```bash
+mega compile --optimize --sizes
+```
+
+### Watch for changes and recompile automatically
+
+```bash
+mega compile --watch
+```
+
+### Force recompilation by clearing the cache
+
+```bash
+mega compile --force
+```
+
+## Related
+
+- [deploy](/commands/deploy) - Deploy compiled contracts
+- [setup](/commands/setup) - Ensure Foundry is properly installed

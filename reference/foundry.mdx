@@ -1,0 +1,82 @@
+---
+title: 'Foundry'
+description: 'Quick reference guide for Foundry tools used in Mega CLI'
+---
+
+# Foundry Reference
+
+Mega CLI builds on top of [Foundry](https://book.getfoundry.sh/), a powerful Ethereum development toolkit. This page provides a quick reference for Foundry tools that are used within Mega CLI.
+
+<Note>
+  For comprehensive documentation, refer to the [Foundry Book](https://book.getfoundry.sh/), which is the official documentation.
+</Note>
+
+## Foundry Components
+
+Foundry consists of four main tools that are used throughout Mega CLI:
+
+### Forge
+
+Forge is a testing framework for Ethereum smart contracts.
+
+```bash
+# Test your contracts
+forge test
+
+# Run a specific test
+forge test --match-test testFunctionName
+
+# Run tests with verbosity
+forge test -vvv
+```
+
+### Cast
+
+Cast is a command-line tool for interacting with EVM smart contracts, sending transactions, and getting chain data.
+
+```bash
+# Get account balance
+cast balance <address> --rpc-url <rpc-url>
+
+# Call a contract function
+cast call <contract-address> "functionName(uint256)" 123
+
+# Send a transaction
+cast send <contract-address> "functionName(uint256)" 123 --private-key <private-key>
+```
+
+### Anvil
+
+Anvil is a local Ethereum node designed for development with configurable options.
+
+```bash
+# Start a local node
+anvil
+
+# Start with a specific chain ID
+anvil --chain-id 1337
+
+# Start with a specific block time
+anvil --block-time 5
+```
+
+### Chisel
+
+Chisel is a Solidity REPL (Read-Eval-Print Loop) for quick code testing and prototyping.
+
+```bash
+# Start Chisel
+chisel
+
+# In Chisel, you can write and execute Solidity code directly
+uint256 x = 5;
+uint256 y = 10;
+uint256 z = x + y;
+z // Returns: 15
+```
+
+## Additional Resources
+
+- [Foundry Book](https://book.getfoundry.sh/) - Official documentation
+- [Foundry GitHub Repository](https://github.com/foundry-rs/foundry)
+- [Awesome Foundry](https://github.com/crisgarner/awesome-foundry) - A curated list of Foundry resources
