@@ -32,7 +32,8 @@
               "commands/init",
               "commands/dev",
               "commands/compile",
-              "commands/deploy"
+              "commands/deploy",
+              "commands/verify"
             ]
           },
           {

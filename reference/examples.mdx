@@ -9,7 +9,7 @@ This section provides practical examples and complete workflows to help you get 
 
 ## Smart Contract Development Workflow
 
-This example shows a complete workflow for developing, testing, and deploying a smart contract to the Mega testnet.
+This example shows a complete workflow for developing, testing, and deploying a smart contract locally and to MegaETH testnet.
 
 ### 1. Initialize a Foundry Project
 
@@ -95,7 +95,7 @@ forge test
 You can use the mega deploy command like so:
 
 ```bash
-# Deploy to local network
+# Deploy to local network (the default)
 mega deploy src/Counter.sol:Counter --broadcast
 ```
 For more complex deployment scenarios, you can still create deployment scripts in the script/ directory, but for this example, we'll use the direct deployment approach.
@@ -120,8 +120,26 @@ mega faucet --account <account-name>
 ### 8. Deploy to Testnet
 
 ```bash
-# Deploy to Mega testnet
-mega deploy src/Counter.sol:Counter --testnet --broadcast --account <account-name>
+# Deploy to MegaETH testnet
+mega deploy src/Counter.sol:Counter --network testnet --broadcast --account <account-name>
+```
+
+### 9. Deploy to Mainnet
+
+When you are ready and have a funded MegaETH mainnet account:
+
+```bash
+mega deploy src/Counter.sol:Counter --network mainnet --broadcast --account <account-name>
+```
+
+You can override a network's default RPC while retaining chain ID validation:
+
+```bash
+mega deploy src/Counter.sol:Counter \
+  --network mainnet \
+  --rpc-url https://your-mainnet-rpc.example \
+  --broadcast \
+  --account <account-name>
 ```
 
 ## Full-Stack App Development Workflow

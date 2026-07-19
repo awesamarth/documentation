@@ -1,11 +1,11 @@
 ---
 title: 'balance'
-description: 'Check the balance of an account or address on Mega testnet'
+description: 'Check an account or address balance on local, testnet, or mainnet'
 ---
 
 # mega balance
 
-The `balance` command checks the ETH balance of an account or address on the Mega testnet.
+The `balance` command retrieves the ETH balance of an address or stored Foundry account on the selected network.
 
 ## Usage
 
@@ -17,48 +17,57 @@ mega balance [address] [options]
 
 | Argument | Description |
 | -------- | ----------- |
-| `address` | Ethereum address to check (optional if using --account) |
+| `address` | Ethereum address to check. Optional when using `--account` |
 
 ## Options
 
 | Option | Description |
 | ------ | ----------- |
-| `--account <name>` | Use an account from the keystore instead of an address |
-| `-e, --ether` | Show balance in ether instead of wei |
+| `--network <network>` | Select `local`, `testnet`, or `mainnet`. Defaults to `local` |
+| `-r, --rpc-url <url>` | Override the selected network's default RPC URL |
+| `--account <name>` | Resolve an account from Foundry's keystore instead of providing an address |
+| `-e, --ether` | Show the balance in ETH instead of wei |
 
-## Description
+| Network | Chain ID | Default RPC |
+| ------- | -------: | ----------- |
+| `local` | 31337 | `http://127.0.0.1:8545` |
+| `testnet` | 6343 | `https://carrot.megaeth.com/rpc` |
+| `mainnet` | 4326 | `https://mainnet.megaeth.com/rpc` |
 
-This command retrieves the ETH balance for an address on the Mega testnet. You can either provide an address directly or reference a stored account using the `--account` flag. By default, the balance is shown in wei, but you can use the `--ether` flag to display it in ether.
+When using a custom RPC, Mega CLI verifies that its chain ID matches `--network`.
 
 ## Examples
 
-### Check balance of an address
+### Check a local address
 
 ```bash
 mega balance 0x742d35Cc6634C0532925a3b844Bc454e4438f44e
-# Balance: 10000000000000000 wei
 ```
 
-### Check balance of a stored account
+### Check a stored account on testnet
 
 ```bash
-mega balance --account myaccount
-# Balance: 10000000000000000 wei
+mega balance --account myaccount --network testnet --ether
 ```
 
-### Show balance in ether
+### Check an address on mainnet
 
 ```bash
-mega balance 0x742d35Cc6634C0532925a3b844Bc454e4438f44e --ether
-# Balance: 0.01 ETH
+mega balance 0x742d35Cc6634C0532925a3b844Bc454e4438f44e \
+  --network mainnet \
+  --ether
 ```
 
+### Use a custom testnet RPC
+
 ```bash
-mega balance --account myaccount --ether
-# Balance: 0.01 ETH
+mega balance 0x742d35Cc6634C0532925a3b844Bc454e4438f44e \
+  --network testnet \
+  --rpc-url https://your-testnet-rpc.example \
+  --ether
 ```
 
 ## Related
 
 - [account](/commands/account) - Manage accounts
-- [faucet](/commands/faucet) - Get test tokens
+- [faucet](/commands/faucet) - Get MegaETH testnet tokens

@@ -1,0 +1,75 @@
+---
+title: 'verify'
+description: 'Verify contracts deployed on MegaETH testnet or mainnet'
+---
+
+# mega verify
+
+The `verify` command submits contract source information through Foundry's `forge verify-contract`.
+
+## Usage
+
+```bash
+mega verify <address> <contract> [options]
+```
+
+## Arguments
+
+| Argument | Description |
+| -------- | ----------- |
+| `address` | Address of the deployed contract |
+| `contract` | Contract path and name, such as `src/MyContract.sol:MyContract` |
+
+## Network options
+
+| Option | Description |
+| ------ | ----------- |
+| `--network <network>` | Select `testnet` or `mainnet` |
+| `-r, --rpc-url <url>` | Override the selected network's default RPC URL |
+
+Although the shared network option defaults to `local`, local contracts cannot be explorer-verified. Pass either `--network testnet` or `--network mainnet`.
+
+## Common options
+
+| Option | Description |
+| ------ | ----------- |
+| `--verifier <name>` | Verification provider; defaults to `etherscan` |
+| `--verifier-url <url>` | Custom verifier API URL |
+| `--etherscan-api-key <key>` | Etherscan API key |
+| `--constructor-args <args>` | ABI-encoded constructor arguments |
+| `--compiler-version <version>` | Compiler version used for deployment |
+| `--watch` | Wait for the verification result |
+
+## Examples
+
+### Verify on MegaETH testnet
+
+```bash
+mega verify 0xContractAddress src/MyContract.sol:MyContract \
+  --network testnet \
+  --watch
+```
+
+### Verify on MegaETH mainnet
+
+```bash
+mega verify 0xContractAddress src/MyContract.sol:MyContract \
+  --network mainnet \
+  --etherscan-api-key <api-key> \
+  --watch
+```
+
+### Use a custom RPC
+
+```bash
+mega verify 0xContractAddress src/MyContract.sol:MyContract \
+  --network mainnet \
+  --rpc-url https://your-mainnet-rpc.example
+```
+
+Mega CLI validates a custom RPC's chain ID before invoking Foundry.
+
+## Related
+
+- [compile](/commands/compile) - Compile contracts
+- [deploy](/commands/deploy) - Deploy contracts

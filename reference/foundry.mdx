@@ -75,6 +75,20 @@ uint256 z = x + y;
 z // Returns: 15
 ```
 
+## RPC selection in Mega CLI
+
+Foundry commands such as `forge create`, `forge verify-contract`, and `cast balance` support `--rpc-url`. Mega CLI exposes the same override on its network-aware commands:
+
+```bash
+mega deploy src/MyContract.sol:MyContract \
+  --network testnet \
+  --rpc-url https://your-testnet-rpc.example \
+  --broadcast \
+  --account dev
+```
+
+Mega CLI supplies `--rpc-url` to Foundry once and validates that a custom endpoint's chain ID matches `--network`. The network defaults are local Anvil (`31337`), MegaETH testnet (`6343`), and MegaETH mainnet (`4326`).
+
 ## Additional Resources
 
 - [Foundry Book](https://book.getfoundry.sh/) - Official documentation

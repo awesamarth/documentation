@@ -1,11 +1,11 @@
 ---
 title: 'faucet'
-description: 'Request test tokens from the MegaETH testnet faucet'
+description: 'Request tokens from the MegaETH testnet faucet'
 ---
 
 # mega faucet
 
-The `faucet` command requests test tokens from the MegaETH testnet faucet.
+The `faucet` command requests ETH from the MegaETH testnet faucet on chain `6343`. It is testnet-only and does not accept `--network`.
 
 ## Usage
 
@@ -17,14 +17,20 @@ mega faucet [options]
 
 | Option | Description |
 | ------ | ----------- |
-| `--account <name>` | Use a keystore account from the default keystores folder |
+| `--account <name>` | Use a keystore account from Foundry's default keystore folder |
 | `--private-key <key>` | Use the provided private key |
 
-## Description
+## How it works
 
-This command allows you to request test tokens from the MegaETH testnet faucet. You must authenticate using either a stored account or a private key. The faucet has a cooldown period of 24 hours between requests from the same address.
+Each successful request sends `0.001 ETH`. An address can claim once every 24 hours. Because claiming calls the faucet contract, the requesting account needs enough testnet ETH to pay transaction gas.
 
-Each successful request provides 0.00001 ETH to your address on the MegaETH testnet.
+The faucet contract is deployed on MegaETH testnet at:
+
+```text
+0xa84641aced4c404c58E8350AfD3F75bb183Bf77d
+```
+
+There is no separate funding function. Anyone can support the faucet by transferring MegaETH testnet ETH directly to the contract address.
 
 ## Examples
 
@@ -40,12 +46,18 @@ mega faucet --account myaccount
 mega faucet --private-key 0x123...abc
 ```
 
+### Check the resulting testnet balance
+
+```bash
+mega balance --account myaccount --network testnet --ether
+```
+
 ## Notes
-- **Important:** Using the faucet command requires a tiny amount of Mega Testnet ETH (just enough for gas) already in your account. If you don't have any ETH yet, please visit [testnet.megaeth.com](https://testnet.megaeth.com) to get your initial funds.
-- You must provide either `--account` or `--private-key` to authenticate with the faucet
-- Addresses are limited to one faucet claim every 24 hours
-- After a successful request, you can check your balance with `mega balance`
-- If you have extra Mega Testnet ETH and would like to support the faucet, you can transfer it directly to the contract which is deployed at: `0xaF5AA075cb327d83cB8D565D95202494569517a9`. This will help ensure the faucet doesn't run out of funds. Thank you :&#41;
+
+- You must provide either `--account` or `--private-key`
+- Claims are limited to once every 24 hours per address
+- The faucet is only deployed on MegaETH testnet chain `6343`
+- Never put a production private key directly into shell history
 
 ## Related
 

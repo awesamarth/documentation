@@ -17,7 +17,7 @@ Watch a full demonstration of Mega CLI in action:
   allowfullscreen
 ></iframe>
 
-This demo walks through setting up a a starter project, working with accounts, deploying contracts, and more.
+This demo walks through setting up a starter project, working with accounts, deploying contracts, and more.
 
 ## Prerequisites
 
@@ -89,10 +89,22 @@ mega compile
 mega deploy foundry-app/src/GmegaCounter.sol:GmegaCounter --broadcast
 ```
 
-3. Or, deploy to the Mega testnet using your account:
+3. Or, deploy to MegaETH testnet using your account:
 
 ```bash
-mega deploy foundry-app/src/GmegaCounter.sol:GmegaCounter --broadcast --testnet --account <account-name>
+mega deploy foundry-app/src/GmegaCounter.sol:GmegaCounter \
+  --network testnet \
+  --broadcast \
+  --account <account-name>
+```
+
+For a mainnet deployment, select `--network mainnet` and use a funded mainnet account:
+
+```bash
+mega deploy foundry-app/src/GmegaCounter.sol:GmegaCounter \
+  --network mainnet \
+  --broadcast \
+  --account <account-name>
 ```
 
 <Note>
@@ -108,14 +120,14 @@ mega deploy foundry-app/src/GmegaCounter.sol:GmegaCounter --broadcast --testnet 
 You can check the balance of your account or any address:
 
 ```bash
-# Check balance of your account
+# Check a local account balance (local is the default network)
 mega balance --account <account-name>
 
-# Check balance of any address
-mega balance 0x123...abc
+# Check any address on MegaETH testnet
+mega balance 0x123...abc --network testnet
 
-# Show balance in ether instead of wei
-mega balance --account dev --ether
+# Check an account on MegaETH mainnet and show ETH
+mega balance --account dev --network mainnet --ether
 ```
 
 ## Next Steps
@@ -132,4 +144,5 @@ If you encounter any issues:
 
 - Ensure Foundry is properly installed (`mega setup --check`)
 - Check that you're using the latest version of Mega CLI
+- Confirm `--network` is set to `testnet` or `mainnet` for non-local operations
 - For testnet operations, confirm you have test tokens in your account
